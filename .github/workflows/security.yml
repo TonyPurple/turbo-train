@@ -6,7 +6,7 @@ on:
 
 jobs:
   llm-pentest:
-    uses: uses: tonyAllTrue/fuzzy-system/.github/workflows/external-pentest.yml@main
+    uses: tonyAllTrue/fuzzy-system/.github/workflows/external-pentest.yml@main
     with:
       fail-on-moderate: true
     secrets:
