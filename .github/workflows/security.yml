@@ -1,16 +1,15 @@
-name: Security Testing
+name: LLM Endpoint Security Testing
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   llm-pentest:
-    uses: tonyAllTrue/fuzzy-system/.github/workflows/external-pentest.yml@main
+    uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@v0.0.4-alpha
     with:
       fail-on-moderate: true
     secrets:
       ALLTRUE_API_KEY: ${{ secrets.ALLTRUE_API_KEY }}
-      ALLTRUE_API_URL: ${{ secrets.ALLTRUE_API_URL }}
-      ALLTRUE_CUSTOMER_ID: ${{ secrets.ALLTRUE_CUSTOMER_ID }}
-      ALLTRUE_ORGANIZATION_ID: ${{ secrets.ALLTRUE_ORGANIZATION_ID }}
+      ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
+      ALLTRUE_CUSTOMER_ID: ${{ vars.ALLTRUE_CUSTOMER_ID }}
+      ALLTRUE_ORGANIZATION_ID: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
