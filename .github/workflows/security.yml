@@ -5,7 +5,7 @@ on:
 
 jobs:
   llm-pentest:
-    uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@v0.0.6-alpha
+    uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@latest
     with:
       fail-on-moderate: true
     secrets:
