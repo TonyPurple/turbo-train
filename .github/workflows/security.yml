@@ -8,6 +8,20 @@ jobs:
     uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@main
     with:
       fail-on-moderate: true
+      pentest-template: 'CI/CD Pentest All Categories'   
+      python-version: '3.11'                             
+      artifact-retention-days: 30
+      max-concurrent-pentests: 8
+      max-start-retries: 3
+      start-retry-delay: 30
+      poll-interval-secs: 60
+      poll-timeout-secs: 4200
+      poll-backoff-base-secs: 5
+      poll-backoff-max-secs: 300
+      poll-not-found-grace: 3
+      poll-timeout-action: partial                       
+      graphql-extended-timeout-secs: 1800
+      graphql-poll-interval-secs: 120
     secrets:
       ALLTRUE_API_KEY: ${{ secrets.ALLTRUE_API_KEY }}
       ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
