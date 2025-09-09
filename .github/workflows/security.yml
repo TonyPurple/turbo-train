@@ -5,11 +5,12 @@ on:
 
 jobs:
   llm-pentest:
-    uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@v0.0.8-alpha
+    uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@main   # always pull latest main
     with:
+      source-ref: main
       fail-on-moderate: true
-      pentest-template: 'CI/CD Pentest All Categories'   
-      python-version: '3.11'                             
+      pentest-template: 'CI/CD Pentest All Categories'
+      python-version: '3.11'
       artifact-retention-days: 30
       max-concurrent-pentests: 8
       max-start-retries: 3
@@ -19,7 +20,7 @@ jobs:
       poll-backoff-base-secs: 5
       poll-backoff-max-secs: 300
       poll-not-found-grace: 3
-      poll-timeout-action: partial                       
+      poll-timeout-action: partial
       graphql-extended-timeout-secs: 1800
       graphql-poll-interval-secs: 120
       log-jwt-threads: true
@@ -28,3 +29,4 @@ jobs:
       ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
       ALLTRUE_CUSTOMER_ID: ${{ vars.ALLTRUE_CUSTOMER_ID }}
       ALLTRUE_ORGANIZATION_ID: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
+
