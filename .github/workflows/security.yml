@@ -27,7 +27,6 @@ jobs:
       start-stagger-secs: 3
       max-start-retries: 3
       start-retry-delay: 30
-      poll-interval-secs: 60
       poll-timeout-secs: 4200
       poll-timeout-action: partial
       graphql-extended-timeout-secs: 1800
