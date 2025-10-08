@@ -37,5 +37,5 @@ jobs:
       ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
       ALLTRUE_CUSTOMER_ID: ${{ vars.ALLTRUE_CUSTOMER_ID }}
       ALLTRUE_ORGANIZATION_ID: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
