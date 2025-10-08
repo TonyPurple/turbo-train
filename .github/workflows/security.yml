@@ -7,19 +7,28 @@ jobs:
   llm-pentest:
     uses: tonyAllTrue/musical-dollop/.github/workflows/public-pentest.yml@main   # always pull latest main
     with:
+      enable-llm-pentest: true
+      enable-model-scanning: true
+      inventory-scope: 'organization'
+      fail-outcome-at-or-above: 'moderate'
+      on-threshold-action: 'both'  # fail pipeline AND create issues
       source-ref: main
-      fail-on-moderate: true
       pentest-template: 'CI/CD Pentest All Categories'
+      has-valid-pentest-connection-details: true
+      model-scan-policies: ''
+      model-scan-description: 'CI/CD from Caller Workflow'
+      on-hard-failures-action: 'ignore'
+      github-default-labels: 'goodmaster'
+      github-assignees: 'TonyPurple'
+      category-issue-min-severity: 'MEDIUM'
       python-version: '3.11'
       artifact-retention-days: 30
-      max-concurrent-pentests: 8
+      max-concurrent-pentests: 24
+      start-stagger-secs: 3
       max-start-retries: 3
       start-retry-delay: 30
       poll-interval-secs: 60
       poll-timeout-secs: 4200
-      poll-backoff-base-secs: 5
-      poll-backoff-max-secs: 300
-      poll-not-found-grace: 3
       poll-timeout-action: partial
       graphql-extended-timeout-secs: 1800
       graphql-poll-interval-secs: 120
@@ -29,4 +38,5 @@ jobs:
       ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
       ALLTRUE_CUSTOMER_ID: ${{ vars.ALLTRUE_CUSTOMER_ID }}
       ALLTRUE_ORGANIZATION_ID: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
