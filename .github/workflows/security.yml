@@ -11,11 +11,11 @@ jobs:
       enable-model-scanning: true
       inventory-scope: 'organization'
       fail-outcome-at-or-above: 'moderate'
-      on-threshold-action: 'both'  # fail pipeline AND create issues
+      on-threshold-action: 'issue'
       source-ref: main
-      pentest-template: 'Cipher Jailbreak'
+      pentest-template: 'DAN Only'
       has-valid-pentest-connection-details: true
-      model-scan-policies: ''
+      model-scan-policies: 'model-scan-code-execution-prohibited,model-scan-input-output-operations-prohibited,model-scan-network-access-prohibited,model-scan-malware-signatures-prohibited'
       model-scan-description: 'CI/CD from Caller Workflow'
       on-hard-failures-action: 'ignore'
       github-repository: ${{ github.repository }}
