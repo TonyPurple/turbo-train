@@ -18,6 +18,7 @@ jobs:
       model-scan-policies: ''
       model-scan-description: 'CI/CD from Caller Workflow'
       on-hard-failures-action: 'ignore'
+      github-repository: ${{ github.repository }}
       github-default-labels: 'goodmaster'
       github-assignees: 'TonyPurple'
       category-issue-min-severity: 'MEDIUM'
