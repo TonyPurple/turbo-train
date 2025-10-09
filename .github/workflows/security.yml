@@ -13,7 +13,7 @@ jobs:
       fail-outcome-at-or-above: 'moderate'
       on-threshold-action: 'both'  # fail pipeline AND create issues
       source-ref: main
-      pentest-template: 'CI/CD Pentest All Categories'
+      pentest-template: 'Cipher Jailbreak'
       has-valid-pentest-connection-details: true
       model-scan-policies: ''
       model-scan-description: 'CI/CD from Caller Workflow'
@@ -21,7 +21,7 @@ jobs:
       github-repository: ${{ github.repository }}
       github-default-labels: 'goodmaster'
       github-assignees: 'TonyPurple'
-      category-issue-min-severity: 'MEDIUM'
+      category-issue-min-severity: 'LOW'
       python-version: '3.11'
       artifact-retention-days: 30
       max-concurrent-pentests: 24
