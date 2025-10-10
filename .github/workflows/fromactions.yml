@@ -33,7 +33,7 @@ jobs:
           
           # Failure thresholds
           fail-outcome-at-or-above: 'moderate'
-          on-threshold-action: 'issue'
+          on-threshold-action: 'both'
           on-hard-failures-action: 'ignore'
           
           # GitHub Issues integration
