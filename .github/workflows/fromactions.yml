@@ -1,0 +1,61 @@
+name: LLM Endpoint Security Testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  llm-pentest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Run AI Security Scanner
+        uses: alltrue/ai-security-posture-management-scanner@initial
+        with:
+          # Required authentication
+          alltrue-api-key: ${{ secrets.ALLTRUE_API_KEY }}
+          alltrue-api-url: ${{ vars.ALLTRUE_API_URL }}
+          alltrue-customer-id: ${{ vars.ALLTRUE_CUSTOMER_ID }}
+          alltrue-organization-id: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
+          
+          # Execution toggles
+          enable-llm-pentest: true
+          enable-model-scanning: true
+          
+          # Inventory scope
+          inventory-scope: 'organization'
+          
+          # Testing configuration
+          pentest-template: 'DAN Only'
+          model-scan-policies: 'model-scan-code-execution-prohibited,model-scan-input-output-operations-prohibited,model-scan-network-access-prohibited,model-scan-malware-signatures-prohibited'
+          model-scan-description: 'CI/CD from Caller Workflow'
+          
+          # Failure thresholds
+          fail-outcome-at-or-above: 'moderate'
+          on-threshold-action: 'issue'
+          on-hard-failures-action: 'ignore'
+          
+          # GitHub Issues integration
+          github-token: ${{ secrets.GH_TOKEN }}
+          github-repository: ${{ github.repository }}
+          github-default-labels: 'goodmaster'
+          github-assignees: 'TonyPurple'
+          category-issue-min-severity: 'LOW'
+          
+          # Concurrency & performance
+          max-concurrent-pentests: 24
+          start-stagger-secs: 3
+          max-start-retries: 3
+          start-retry-delay: 30
+          
+          # Polling configuration
+          poll-timeout-secs: 4200
+          poll-timeout-action: 'partial'
+          graphql-extended-timeout-secs: 1800
+          graphql-poll-interval-secs: 120
+          
+          # Misc
+          python-version: '3.11'
+          artifact-retention-days: 30
+          source-ref: 'main'
