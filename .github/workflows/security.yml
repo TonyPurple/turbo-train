@@ -31,7 +31,6 @@ jobs:
       poll-timeout-action: partial
       graphql-extended-timeout-secs: 1800
       graphql-poll-interval-secs: 120
-      log-jwt-threads: true
     secrets:
       ALLTRUE_API_KEY: ${{ secrets.ALLTRUE_API_KEY }}
       ALLTRUE_API_URL: ${{ vars.ALLTRUE_API_URL }}
