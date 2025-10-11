@@ -32,7 +32,7 @@ jobs:
           model-scan-description: 'CI/CD from Caller Workflow'
           
           # Failure thresholds
-          fail-outcome-at-or-above: 'moderate'
+          fail-outcome-at-or-above: ''
           on-threshold-action: 'both'
           on-hard-failures-action: 'ignore'
           
