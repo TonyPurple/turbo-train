@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.2
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.3
         with:
           # Required authentication
           alltrue-api-key: ${{ secrets.ALLTRUE_API_KEY }}
@@ -20,7 +20,7 @@ jobs:
           alltrue-organization-id: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
           
           # Execution toggles
-          enable-llm-pentest: false
+          enable-llm-pentest: true
           enable-model-scanning: true
           
           # Inventory scope
@@ -29,7 +29,7 @@ jobs:
           # Testing configuration
           # pentest-template: 'DAN Only'
           model-scan-description: 'CI/CD from Caller Workflow'
-          model-scan-policies: 'model-custom-layers-prohibited'
+          # model-scan-policies: 'model-custom-layers-prohibited'
           
           # Failure thresholds
           fail-outcome-at-or-above: 'moderate'
