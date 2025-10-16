@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.1
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.2
         with:
           # Required authentication
           alltrue-api-key: ${{ secrets.ALLTRUE_API_KEY }}
@@ -27,7 +27,7 @@ jobs:
           inventory-scope: 'organization'
           
           # Testing configuration
-          pentest-template: 'DAN Only'
+          # pentest-template: 'DAN Only'
           model-scan-description: 'CI/CD from Caller Workflow'
           
           # Failure thresholds
