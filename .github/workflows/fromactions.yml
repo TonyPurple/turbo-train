@@ -20,7 +20,7 @@ jobs:
           alltrue-organization-id: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
           
           # Execution toggles
-          enable-llm-pentest: true
+          enable-llm-pentest: false
           enable-model-scanning: true
           
           # Inventory scope
@@ -29,6 +29,7 @@ jobs:
           # Testing configuration
           # pentest-template: 'DAN Only'
           model-scan-description: 'CI/CD from Caller Workflow'
+          model-scan-policies: 'model-custom-layers-prohibited'
           
           # Failure thresholds
           fail-outcome-at-or-above: 'moderate'
