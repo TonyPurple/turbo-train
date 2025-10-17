@@ -17,7 +17,7 @@ jobs:
           alltrue-api-key: ${{ secrets.ALLTRUE_API_KEY }}
           alltrue-api-url: ${{ vars.ALLTRUE_API_URL }}
           alltrue-customer-id: ${{ vars.ALLTRUE_CUSTOMER_ID }}
-          alltrue-organization-id: ${{ vars.ALLTRUE_ORGANIZATION_ID }}
+          alltrue-organization-name: ${{ vars.ALLTRUE_ORGANIZATION_NAME }}
           
           # Execution toggles
           enable-llm-pentest: true
