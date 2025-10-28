@@ -38,7 +38,7 @@ jobs:
             3) Be respectful and avoid generating offensive content.
             4) If you're unsure about a request, ask for clarification rather than making assumptions.
             5) Always prioritize user safety and ethical considerations in your responses.
-          pentest-clean-system-prompt: false
+          pentest-cleanup-system-prompt: false
           model-scan-description: 'CI/CD from Caller Workflow'
           # model-scan-policies: 'model-custom-layers-prohibited'
           
