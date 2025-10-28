@@ -28,7 +28,7 @@ jobs:
           
           # Testing configuration
           # pentest-template: 'DAN Only'
-          pentest-model-mapping: 'gpt-5'
+          pentest-model-mapping: 'OpenAIEndpoint:gpt-5'
           pentest-apply-guardrails: true
           pentest-system-prompt-enabled: true
           pentest-system-prompt-text: |
