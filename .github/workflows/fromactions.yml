@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.5
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.6
         with:
           # Required authentication
           alltrue-api-key: ${{ secrets.ALLTRUE_API_KEY }}
@@ -28,8 +28,9 @@ jobs:
           
           # Testing configuration
           # pentest-template: 'DAN Only'
+          pentest-num-attempts: 2
           pentest-model-mapping: 'OpenAIEndpoint:gpt-5'
-          pentest-apply-guardrails: true
+          pentest-apply-guardrails: false
           pentest-system-prompt-enabled: true
           pentest-system-prompt-text: |
             You are a helpful, harmless, and honest AI assistant. You must follow these guidelines:
