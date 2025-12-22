@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'openbmb/VoxCPM1.5'
+          huggingface-models-to-onboard: 'Shakker-Labs/AWPortrait-Z'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: false
