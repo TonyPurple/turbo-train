@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.7
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.8
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -31,11 +31,11 @@ jobs:
           # ========================================
           # Inventory Scope
           # ========================================
-          inventory-scope: 'resource'
+          inventory-scope: 'project'
           # project-ids: ''
           project-names: 'Sample Inventory BOM'
           # target-resource-ids: ''
-          target-resource-names: 'Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main), Basic_model ML Model (https://huggingface.co/maciejatmend/test-msc-model/blob/main), OpenAI API Key (test-BOM)'
+          # target-resource-names: 'Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main), Basic_model ML Model (https://huggingface.co/maciejatmend/test-msc-model/blob/main), OpenAI API Key (test-BOM)'
           
           # ========================================
           # LLM Pentest: Basic Configuration
@@ -79,10 +79,10 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'Shakker-Labs/AWPortrait-Z'
+          huggingface-models-to-onboard: 'facebook/sam3'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
-          huggingface-onboarding-only: false
+          huggingface-onboarding-only: true
           
           # ========================================
           # Failure Thresholds & Actions
@@ -113,8 +113,7 @@ jobs:
           # ========================================
           poll-timeout-secs: 4200
           poll-timeout-action: 'partial'
-          graphql-extended-timeout-secs: 1800
-          graphql-poll-interval-secs: 120
+          graphql-poll-interval-secs: 30
           
           # ========================================
           # Misc
