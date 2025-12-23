@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'unsloth/Nemotron-3-Nano-30B-A3B-GGUF'
+          huggingface-models-to-onboard: 'deepseek-ai/DeepSeek-V3.2'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: true
@@ -111,7 +111,7 @@ jobs:
           # ========================================
           # Polling Configuration
           # ========================================
-          poll-timeout-secs: 4200
+          poll-timeout-secs: 5400
           poll-timeout-action: 'partial'
           graphql-poll-interval-secs: 30
           
