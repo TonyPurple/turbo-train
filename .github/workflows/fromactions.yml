@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'facebook/sam3'
+          huggingface-models-to-onboard: 'unsloth/Nemotron-3-Nano-30B-A3B-GGUF'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: true
