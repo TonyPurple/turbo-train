@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.8
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.9
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'deepseek-ai/DeepSeek-V3.2'
+          huggingface-models-to-onboard: 'google/functiongemma-270m-it'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: true
