@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run AI Security Scanner
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.9
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.10
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'LiquidAI/LFM2-2.6B-Exp'
+          huggingface-models-to-onboard: 'nvidia/NitroGen'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: true
