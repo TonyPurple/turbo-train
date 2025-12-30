@@ -40,7 +40,7 @@ jobs:
           # ========================================
           # LLM Pentest: Basic Configuration
           # ========================================
-          # pentest-template: 'Prompt Injection'
+          pentest-template: 'Cipher jailbreak dynamic'
           # pentest-num-attempts: 2
           
           # ========================================
@@ -79,7 +79,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'google/functiongemma-270m-it'
+          huggingface-models-to-onboard: 'LiquidAI/LFM2-2.6B-Exp'
           # huggingface-onboarding-project-id: ''
           huggingface-onboarding-wait-secs: 10
           huggingface-onboarding-only: true
