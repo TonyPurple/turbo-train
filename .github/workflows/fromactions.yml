@@ -25,17 +25,17 @@ jobs:
           # ========================================
           # Execution Toggles
           # ========================================
-          enable-llm-pentest: true
+          enable-llm-pentest: false
           enable-model-scanning: true
           
           # ========================================
           # Inventory Scope
           # ========================================
-          inventory-scope: 'project'
+          inventory-scope: 'resource'
           # project-ids: ''
           project-names: 'Sample Inventory BOM'
           # target-resource-ids: ''
-          # target-resource-names: 'Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main), Basic_model ML Model (https://huggingface.co/maciejatmend/test-msc-model/blob/main), OpenAI API Key (test-BOM)'
+          target-resource-names: 'IHasFarms/MaliciousModel,unsloth/Qwen-Image-Edit-2511-GGUF,lightx2v/Qwen-Image-Edit-2511-Lightning'
           
           # ========================================
           # LLM Pentest: Basic Configuration
@@ -72,22 +72,22 @@ jobs:
           # ========================================
           # Model Scanning Configuration
           # ========================================
-          model-scan-description: 'CI/CD from Caller Workflow'
-          # model-scan-policies: 'model-scan-code-execution-prohibited,model-scan-input-output-operations-prohibited'
+          model-scan-description: 'Targeted Security Scan - Config 9F2D'
+          model-scan-policies: 'model-scan-malware-signatures-prohibited,model-custom-layers-prohibited'
           
           # ========================================
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'nvidia/NitroGen'
+          huggingface-models-to-onboard: 'Phr00t/Qwen-Image-Edit-Rapid-AIO'
           # huggingface-onboarding-project-id: ''
-          huggingface-onboarding-wait-secs: 10
-          huggingface-onboarding-only: true
+          huggingface-onboarding-wait-secs: 20
+          huggingface-onboarding-only: false
           
           # ========================================
           # Failure Thresholds & Actions
           # ========================================
-          fail-outcome-at-or-above: 'poor'
+          fail-outcome-at-or-above: 'moderate'
           on-threshold-action: 'both'
           on-hard-failures-action: 'ignore'
           
@@ -96,24 +96,24 @@ jobs:
           # ========================================
           github-token: ${{ secrets.GH_TOKEN }}
           github-repository: ${{ github.repository }}
-          github-default-labels: 'security,ai-safety,ci-test'
+          github-default-labels: 'security,model-scan,randomized-test'
           github-assignees: 'TonyPurple'
-          category-issue-min-severity: 'LOW'
+          category-issue-min-severity: 'HIGH'
           
           # ========================================
           # Concurrency & Performance
           # ========================================
-          max-concurrent-pentests: 24
-          start-stagger-secs: 3
-          max-start-retries: 3
-          start-retry-delay: 30
+          max-concurrent-pentests: 5
+          start-stagger-secs: 10
+          max-start-retries: 2
+          start-retry-delay: 60
           
           # ========================================
           # Polling Configuration
           # ========================================
-          poll-timeout-secs: 5400
-          poll-timeout-action: 'partial'
-          graphql-poll-interval-secs: 30
+          poll-timeout-secs: 3600
+          poll-timeout-action: 'fail'
+          graphql-poll-interval-secs: 60
           
           # ========================================
           # Misc
