@@ -35,7 +35,7 @@ jobs:
           # project-ids: ''
           project-names: 'Sample Inventory BOM'
           # target-resource-ids: ''
-          target-resource-names: 'IHasFarms/MaliciousModel,unsloth/Qwen-Image-Edit-2511-GGUF,lightx2v/Qwen-Image-Edit-2511-Lightning'
+          target-resource-names: 'repo:IHasFarms/MaliciousModel,repo:unsloth/Qwen-Image-Edit-2511-GGUF,repo:lightx2v/Qwen-Image-Edit-2511-Lightning'
           
           # ========================================
           # LLM Pentest: Basic Configuration
@@ -72,22 +72,22 @@ jobs:
           # ========================================
           # Model Scanning Configuration
           # ========================================
-          model-scan-description: 'Targeted Security Scan - Config 9F2D'
-          model-scan-policies: 'model-scan-malware-signatures-prohibited,model-custom-layers-prohibited'
+          model-scan-description: 'Testing Enhanced Resource Filtering'
+          model-scan-policies: 'model-scan-code-execution-prohibited,model-scan-input-output-operations-prohibited,model-scan-network-access-prohibited,model-scan-malware-signatures-prohibited,model-custom-layers-prohibited'
           
           # ========================================
           # HuggingFace Model Onboarding
           # ========================================
-          huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'Phr00t/Qwen-Image-Edit-Rapid-AIO'
+          huggingface-onboarding-enabled: false
+          # huggingface-models-to-onboard: 'Phr00t/Qwen-Image-Edit-Rapid-AIO'
           # huggingface-onboarding-project-id: ''
-          huggingface-onboarding-wait-secs: 20
-          huggingface-onboarding-only: false
+          # huggingface-onboarding-wait-secs: 20
+          # huggingface-onboarding-only: false
           
           # ========================================
           # Failure Thresholds & Actions
           # ========================================
-          fail-outcome-at-or-above: 'moderate'
+          fail-outcome-at-or-above: 'poor'
           on-threshold-action: 'both'
           on-hard-failures-action: 'ignore'
           
@@ -103,7 +103,7 @@ jobs:
           # ========================================
           # Concurrency & Performance
           # ========================================
-          max-concurrent-pentests: 5
+          max-concurrent-pentests: 8
           start-stagger-secs: 10
           max-start-retries: 2
           start-retry-delay: 60
@@ -113,7 +113,7 @@ jobs:
           # ========================================
           poll-timeout-secs: 3600
           poll-timeout-action: 'fail'
-          graphql-poll-interval-secs: 60
+          graphql-poll-interval-secs: 30
           
           # ========================================
           # Misc
