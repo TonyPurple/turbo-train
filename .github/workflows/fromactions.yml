@@ -31,11 +31,11 @@ jobs:
           # ========================================
           # Inventory Scope
           # ========================================
-          inventory-scope: 'resource'
+          inventory-scope: 'project'
           # project-ids: ''
-          project-names: 'Sample Inventory BOM,2nd Project'
+          project-names: '2nd Project'
           # target-resource-ids: ''
-          target-resource-names: '*.pkl,file:exploit.py,repo:IHasFarms/MaliciousModel,=OpenAI API Key (test-BOM),Anthropic'
+          # target-resource-names: '*.pkl,file:exploit.py,repo:IHasFarms/MaliciousModel,=OpenAI API Key (test-BOM),Anthropic'
           
           # ========================================
           # LLM Pentest: Basic Configuration
@@ -74,48 +74,48 @@ jobs:
           # ========================================
           # Model Scanning Configuration
           # ========================================
-          model-scan-description: 'Randomized Test: Pattern Matching Validation'
-          model-scan-policies: 'model-scan-malware-signatures-prohibited,model-scan-network-access-prohibited,model-custom-layers-prohibited'
+          model-scan-description: 'Chaos Test: Random Subset Scan'
+          model-scan-policies: 'model-scan-code-execution-prohibited,model-scan-input-output-operations-prohibited,model-scan-network-access-prohibited,model-scan-malware-signatures-prohibited,model-custom-layers-prohibited'
           
           # ========================================
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'LiquidAI/LFM2.5-1.2B-Instruct'
+          huggingface-models-to-onboard: 'Qwen/Qwen-Image-2512'
           # huggingface-onboarding-project-id: ''
-          huggingface-onboarding-wait-secs: 15
-          huggingface-onboarding-only: false
+          huggingface-onboarding-wait-secs: 20
+          huggingface-onboarding-only: true
           
           # ========================================
           # Failure Thresholds & Actions
           # ========================================
-          fail-outcome-at-or-above: 'moderate'
-          on-threshold-action: 'issue'
-          on-hard-failures-action: 'both'
+          fail-outcome-at-or-above: 'critical'
+          on-threshold-action: 'both'
+          on-hard-failures-action: 'issue'
           
           # ========================================
           # GitHub Issues Integration
           # ========================================
           github-token: ${{ secrets.GH_TOKEN }}
           github-repository: ${{ github.repository }}
-          github-default-labels: 'security,randomized-test,pattern-matching'
+          github-default-labels: 'chaos-test,security,scheduled'
           github-assignees: 'TonyPurple'
-          category-issue-min-severity: 'MEDIUM'
+          category-issue-min-severity: 'INFORMATIONAL'
           
           # ========================================
           # Concurrency & Performance
           # ========================================
-          max-concurrent-pentests: 12
-          start-stagger-secs: 5
-          max-start-retries: 4
-          start-retry-delay: 45
+          max-concurrent-pentests: 20
+          start-stagger-secs: 2
+          max-start-retries: 5
+          start-retry-delay: 30
           
           # ========================================
           # Polling Configuration
           # ========================================
-          poll-timeout-secs: 7200
-          poll-timeout-action: 'partial'
-          graphql-poll-interval-secs: 45
+          poll-timeout-secs: 10800
+          poll-timeout-action: 'continue'
+          graphql-poll-interval-secs: 60
           
           # ========================================
           # Misc
