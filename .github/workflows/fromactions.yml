@@ -35,7 +35,7 @@ jobs:
           # project-ids: ''
           project-names: 'Sample Inventory BOM, 2nd Project'
           # target-resource-ids: ''
-          target-resource-names: '=Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main),file:*.pkl*,*API Key*'
+          target-resource-names: '=Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main),*Endpoint*,*API Key*'
           
           # ========================================
           # LLM Pentest: Basic Configuration
