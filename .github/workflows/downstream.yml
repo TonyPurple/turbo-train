@@ -42,7 +42,7 @@ jobs:
           # ========================================
           inventory-scope: 'resource'
           project-names: 'Sample Inventory BOM, 2nd Project'
-          target-resource-names: '=Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main),*Endpoint*,*API Key*'
+          target-resource-names: '=Basic_model ML Model (https://huggingface.co/achilles1313/test_gguf/blob/main),*Endpoint*'
 
           # ========================================
           # LLM Pentest: Basic Configuration
@@ -96,7 +96,9 @@ jobs:
           github-repository: ${{ github.repository }}
           github-default-labels: 'edge-case,model-scan,bi-weekly'
           github-assignees: 'TonyPurple'
-          category-issue-min-severity: 'MEDIUM'
+          # disable per-category (pentest) and per-policy (model-scan) issues
+          # while still allowing "job-level" issue behavior when on-*-action includes "issue"
+          category-issue-min-severity: 'none'
 
           # ========================================
           # Concurrency & Performance
