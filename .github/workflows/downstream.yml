@@ -65,7 +65,7 @@ jobs:
           pentest-cleanup-dataset: true
 
           pentest-resource-system-description-enabled: true
-          penttest-resource-system-description-text: 'Production AI assistant with strict safety, privacy, and compliance requirements'
+          pentest-resource-system-description-text: 'Production AI assistant with strict safety, privacy, and compliance requirements'
           pentest-cleanup-resource-system-description: false
 
           # ========================================
