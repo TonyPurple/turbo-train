@@ -4,12 +4,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  llm-pentest:
+  security-scan:
     runs-on: ubuntu-latest
 
     # Expose outputs to downstream jobs
+    # NEW: Granular per-phase outputs for targeted job control
     outputs:
-      pentest-status: ${{ steps.security-scan.outputs.pentest-status }}
+      overall-status: ${{ steps.security-scan.outputs.overall-status }}
+      llm-pentest-status: ${{ steps.security-scan.outputs.llm-pentest-status }}
+      model-scan-status: ${{ steps.security-scan.outputs.model-scan-status }}
       worst-outcome: ${{ steps.security-scan.outputs.worst-outcome }}
 
     steps:
@@ -21,7 +24,7 @@ jobs:
         # Optional but recommended: keep the workflow moving so we can still publish outputs
         # and run downstream notification jobs even if the scan fails.
         continue-on-error: true
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.13
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v.0.0.14
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -78,7 +81,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'nvidia/nemotron-speech-streaming-en-0.6b'
+          huggingface-models-to-onboard: 'LiquidAI/LFM2.5-1.2B-Instruct'
           huggingface-onboarding-project-name: '3rd Project'
           huggingface-onboarding-wait-secs: 30
           huggingface-onboarding-only: false
@@ -126,36 +129,107 @@ jobs:
       - name: Print scan outputs (debug)
         if: always()
         run: |
-          echo "pentest-status: ${{ steps.security-scan.outputs.pentest-status }}"
-          echo "worst-outcome:  ${{ steps.security-scan.outputs.worst-outcome }}"
+          echo "=== Scan Outputs ==="
+          echo "Overall Status:     ${{ steps.security-scan.outputs.overall-status }}"
+          echo "LLM Pentest Status: ${{ steps.security-scan.outputs.llm-pentest-status }}"
+          echo "Model Scan Status:  ${{ steps.security-scan.outputs.model-scan-status }}"
+          echo "Worst Outcome:      ${{ steps.security-scan.outputs.worst-outcome }}"
 
       # Optional: if you want THIS job to fail based on the action result,
       # do it explicitly at the end (so outputs + downstream jobs still work).
       - name: Fail job if scan indicates failure
-        if: always() && steps.security-scan.outputs.pentest-status == 'failure'
+        if: always() && steps.security-scan.outputs.overall-status == 'failure'
         run: |
-          echo "Failing job because pentest-status=failure"
+          echo "Failing job because overall-status=failure"
           exit 1
 
-  notify:
-    needs: llm-pentest
+  # NEW: Targeted notification for LLM team
+  notify-llm-team:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    if: always() && needs.security-scan.outputs.llm-pentest-status == 'failure'
+    steps:
+      - name: Alert LLM Security Team
+        run: |
+          echo "🚨 LLM Endpoint Security Issues Detected!"
+          echo "Status: ${{ needs.security-scan.outputs.llm-pentest-status }}"
+          echo "Worst Outcome: ${{ needs.security-scan.outputs.worst-outcome }}"
+          echo ""
+          echo "Action Required:"
+          echo "- Review pentest CSV results in artifacts"
+          echo "- Check GitHub issues for detailed findings"
+          echo "- Assess endpoint configurations and prompts"
+
+  # NEW: Targeted notification for ML team
+  notify-ml-team:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    if: always() && needs.security-scan.outputs.model-scan-status == 'failure'
+    steps:
+      - name: Alert ML Security Team
+        run: |
+          echo "🚨 Model Security Issues Detected!"
+          echo "Status: ${{ needs.security-scan.outputs.model-scan-status }}"
+          echo "Worst Outcome: ${{ needs.security-scan.outputs.worst-outcome }}"
+          echo ""
+          echo "Action Required:"
+          echo "- Review model scan CSV results in artifacts"
+          echo "- Check GitHub issues for policy violations"
+          echo "- Assess model provenance and dependencies"
+
+  # General notification job (runs always, reports all statuses)
+  notify-summary:
+    needs: security-scan
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - name: Report Results
+      - name: Report Complete Results
         run: |
-          echo "Status:       ${{ needs.llm-pentest.outputs.pentest-status }}"
-          echo "Worst Outcome:${{ needs.llm-pentest.outputs.worst-outcome }}"
+          echo "======================================"
+          echo "Security Scan Summary"
+          echo "======================================"
+          echo "Overall Status:     ${{ needs.security-scan.outputs.overall-status }}"
+          echo "LLM Pentest Status: ${{ needs.security-scan.outputs.llm-pentest-status }}"
+          echo "Model Scan Status:  ${{ needs.security-scan.outputs.model-scan-status }}"
+          echo "Worst Outcome:      ${{ needs.security-scan.outputs.worst-outcome }}"
+          echo "======================================"
 
       # Example: gate a downstream action (like deployment) on outcome
       - name: Block deploy on Critical
-        if: needs.llm-pentest.outputs.worst-outcome == 'Critical'
+        if: needs.security-scan.outputs.worst-outcome == 'Critical'
         run: |
-          echo "🚨 Critical vulnerabilities detected - blocking deployment"
+          echo "🚨 CRITICAL vulnerabilities detected - blocking deployment"
           exit 1
 
       # Example: soft-fail / warning channel
       - name: Warn on Poor or Moderate
-        if: needs.llm-pentest.outputs.worst-outcome == 'Poor' || needs.llm-pentest.outputs.worst-outcome == 'Moderate'
+        if: |
+          needs.security-scan.outputs.worst-outcome == 'Poor' || 
+          needs.security-scan.outputs.worst-outcome == 'Moderate'
         run: |
-          echo "⚠️ Security findings require attention: ${{ needs.llm-pentest.outputs.worst-outcome }}"
+          echo "⚠️  Security findings require attention: ${{ needs.security-scan.outputs.worst-outcome }}"
+
+  # NEW: Example deployment gate using phase-specific status
+  deploy-staging:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    # Deploy to staging if no Critical issues (regardless of which phase failed)
+    if: needs.security-scan.outputs.worst-outcome != 'Critical'
+    steps:
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying to staging environment..."
+          echo "Outcome: ${{ needs.security-scan.outputs.worst-outcome }}"
+          # Your deployment logic here
+
+  # NEW: Example deployment gate requiring full success
+  deploy-production:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    # Only deploy to production if everything passed
+    if: needs.security-scan.outputs.overall-status == 'success'
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "✅ All security checks passed - deploying to production!"
+          # Your deployment logic here
