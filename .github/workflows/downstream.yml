@@ -21,7 +21,7 @@ jobs:
         # Optional but recommended: keep the workflow moving so we can still publish outputs
         # and run downstream notification jobs even if the scan fails.
         continue-on-error: true
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.12
+        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.13
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -78,7 +78,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'IQuestLab/IQuest-Coder-V1-40B-Loop-Instruct'
+          huggingface-models-to-onboard: 'nvidia/nemotron-speech-streaming-en-0.6b'
           huggingface-onboarding-project-name: '3rd Project'
           huggingface-onboarding-wait-secs: 30
           huggingface-onboarding-only: false
