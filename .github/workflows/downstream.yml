@@ -24,7 +24,7 @@ jobs:
         # Optional but recommended: keep the workflow moving so we can still publish outputs
         # and run downstream notification jobs even if the scan fails.
         continue-on-error: true
-        uses: tonyAllTrue/ai-security-posture-management-scanner@v0.0.15
+        uses: AllTrue-ai/ai-security-posture-management-scanner@v0.0.15
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -80,11 +80,11 @@ jobs:
           # ========================================
           # HuggingFace Model Onboarding
           # ========================================
-          huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'naver-hyperclovax/HyperCLOVAX-SEED-Think-32B'
-          huggingface-onboarding-project-name: '3rd Project'
-          huggingface-onboarding-wait-secs: 30
-          huggingface-onboarding-only: false
+          huggingface-onboarding-enabled: false
+          # huggingface-models-to-onboard: 'naver-hyperclovax/HyperCLOVAX-SEED-Think-32B'
+          # huggingface-onboarding-project-name: '3rd Project'
+          # huggingface-onboarding-wait-secs: 30
+          # huggingface-onboarding-only: false
 
           # ========================================
           # Failure Thresholds & Actions
