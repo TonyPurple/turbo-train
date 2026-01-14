@@ -22,7 +22,7 @@ jobs:
         # Optional but recommended: keep the workflow moving so we can still publish outputs
         # and run downstream notification jobs even if the scan fails.
         continue-on-error: true
-        uses: AllTrue-ai/ai-security-posture-management-scanner@v0.0.18
+        uses: AllTrue-ai/ai-security-posture-management-scanner@v0.0.19
         with:
           # ========================================
           # REQUIRED: Core Authentication
