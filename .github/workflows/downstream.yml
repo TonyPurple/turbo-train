@@ -23,7 +23,7 @@ jobs:
         # Optional but recommended: keep the workflow moving so we can still publish outputs
         # and run downstream notification jobs even if the scan fails.
         continue-on-error: true
-        uses: AllTrue-ai/ai-security-posture-management-scanner@v1.0.3
+        uses: AllTrue-ai/ai-security-posture-management-scanner@v1.0.4
         with:
           # ========================================
           # REQUIRED: Core Authentication
@@ -80,7 +80,7 @@ jobs:
           # HuggingFace Model Onboarding
           # ========================================
           huggingface-onboarding-enabled: true
-          huggingface-models-to-onboard: 'RuneXX/LTX-2-Workflows'
+          huggingface-models-to-onboard: 'tencent/Youtu-VL-4B-Instruct'
           huggingface-onboarding-project-name: '3rd Project'
           huggingface-onboarding-wait-secs: 30
           huggingface-onboarding-only: false
